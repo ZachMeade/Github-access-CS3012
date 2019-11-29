@@ -26,9 +26,9 @@ return (
    <div class="col-3">
       <h5>Select a repo to analyse</h5>
       <div class="list-group" id="list-tab" role="tablist">
-         <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#allrepos" role="tab" aria-controls="home">All repos</a>
+         <a class="list-group-item list-group-item-dark" id="list-home-list" data-toggle="list" href="#allrepos" role="tab" aria-controls="home">All repos</a>
          {elements.map((value,index) => {
-         return(<a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href={"#"+value} role="tab" aria-controls="home">{value}</a>)
+         return(<a class="list-group-item list-group-item-dark" id="list-home-list" data-toggle="list" href={"#"+value} role="tab" aria-controls="home">{value}</a>)
          })}
       </div>
    </div>
@@ -43,9 +43,13 @@ return (
              type: 'bar'
            }
          ]}
-         layout={ {width: 700, height: 400, title: 'Number of Stars per Repository'} }
-         /></div>
-
+         layout={ {width: 700, height: 400, paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor: 'rgba(0,0,0,0)',title: 'Number of Stars per Repository'} }
+         />
+         <div>
+             {props.infoclean.login ?  <div>{ <img src={"http://ghchart.rshah.org/"+props.infoclean.login} alt='' />
+             }<br/></div> : null }
+         </div>
+         </div>
          {elements.map((value,index) => {
          return(
          <div class="tab-pane fade show" id={value} role="tabpanel" aria-labelledby="list-homes-list">
@@ -56,35 +60,21 @@ return (
             <div class="row justify-content-left text-dark">
                <div class="col-md-5 text-left">
                   <div class="row justify-content-left text-dark">
-                     <div class="col-md-3 text-left ">Size:</div>
-                     <div class="col-md-7 text-left ">{String((Number(props.repos[index].size) * .001).toFixed(3))+" Mb"}</div>
                   </div>
                </div>
                <div class="col-md-3 text-left">
                   <div class="row justify-content-left text-dark">
-                     <div class="col-md-6 text-left">Forks:</div>
-                     {props.repos[index].forks ?
-                     <div class="col-md-6 text-left ">{props.repos[index].forks}</div>
-                     :
-                     <div class="col-md-6 text-left ">0</div>
-                     }
                   </div>
                </div>
 
                   <div class="col-md-4 text-left">
                   <div class="row justify-content-left text-dark">
-                  <div class="col-md-4 text-right">Created:</div>
-                  {props.repos[index].created_at ?
-         <div class="col-md-8 text-left border-right">{<Moment from={new Date()}>{props.repos[index].created_at}</Moment>}</div>
-      : null }
                   </div>
                </div>
             </div>
             <div class="row justify-content-left text-dark">
                <div class="col-md-5 text-left">
                   <div class="row justify-content-left text-dark">
-                     <div class="col-md-3 text-left ">Language:</div>
-                     <div class="col-md-7 text-left ">{props.repos[index].language}</div>
                   </div>
                   <Plot
         data={[
@@ -95,31 +85,16 @@ return (
             marker: {color: 'lightblue'},
           }
         ]}
-        layout={ {width: 700, height: 350, title: 'A Fancy Plot'} }
-      />
+        layout={ {width: 700, height: 350, paper_bgcolor:'rgba(0,0,0,0)',plot_bgcolor: 'rgba(0,0,0,0)', title: 'Forks vs Watchers'} }
+        />
                </div>
                <div class="col-md-3 text-left">
                   <div class="row justify-content-left text-dark">
-                     <div class="col-md-6 text-left">Watchers: </div>
-                     {props.repos[index].watchers ?
-                     <div class="col-md-6 text-left ">{props.repos[index].watchers}</div>
-                     :
-                     <div class="col-md-6 text-left ">0</div>
-                     }
                   </div>
                </div>
 
                   <div class="col-md-4 text-left">
                   <div class="row justify-content-left text-dark">
-                  <div class="col-md-4 text-right">Updated:</div>
-                  {props.repos[index].created_at ?
-         <div class="col-md-8 text-left border-right">{<Moment from={new Date()}>{props.repos[index].updated_at}</Moment>}
-         </div>
-
-
-      : null }
-
-
                   </div>
                </div>
             </div>
@@ -129,12 +104,6 @@ return (
          )
          })}
 
-      </div>
-      <div>
-
-
-          {props.infoclean.login ?  <div>{ <img src={"http://ghchart.rshah.org/"+props.infoclean.login} alt='' />
-          }<br/></div> : null }
       </div>
    </div>
 </div>

@@ -21,11 +21,11 @@ class App extends Component {
   }
 handleUserFormSubmit(event) {
     event.preventDefault();
-	axios.get('https://api.github.com/users/'+this.state.formData.username+'/repos?access_token=2778a9d7f2684932c15c8156a89858959ebec1e1').then(response => this.setState({
+	axios.get('https://api.github.com/users/'+this.state.formData.username+'/repos?access_token=0393c72a7bb5ddca6450b428aec4093247c8baf2').then(response => this.setState({
       repos : response.data,
     })).catch((err) => { console.log(err); });
 
-       axios.get('https://api.github.com/users/'+this.state.formData.username+'?access_token=2778a9d7f2684932c15c8156a89858959ebec1e1').then(response => this.setState({
+       axios.get('https://api.github.com/users/'+this.state.formData.username+'?access_token=0393c72a7bb5ddca6450b428aec4093247c8baf2').then(response => this.setState({
       infoclean: '',
       gitun: response.data.login,
       infoclean: response.data,
@@ -43,8 +43,9 @@ handleFormChange(event) {
 render() {
     return (
 
+<div className="App .bg-gradient-light">
 
-      <div className="App">
+
 	  <main role="main">
 
 		<br></br>
